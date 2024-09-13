@@ -5,4 +5,4 @@ COPY . .
 
 EXPOSE 80 443
 
-CMD ["rcatcher", "-config", "config.ini"]
+CMD ["./rcatcher", "--config", "config.ini"]
