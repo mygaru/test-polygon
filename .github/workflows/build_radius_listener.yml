@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: radius-listener
+  IMAGE_NAME: maygaru/radius-listener
 
 jobs:
   release:
