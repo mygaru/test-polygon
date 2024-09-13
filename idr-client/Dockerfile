@@ -5,6 +5,6 @@ COPY . .
 
 RUN ls -l
 
-EXPOSE 80 443
+EXPOSE 8080
 
 CMD ["./idrclient", "--config", "config.ini"]
