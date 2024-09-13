@@ -5,6 +5,10 @@ on:
   push:
     branches: [ main ]
 
+    paths:
+      - 'idr-client/**'
+      - '.github/workflows/build_idr_client.yml'
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: mygaru/idr-client
