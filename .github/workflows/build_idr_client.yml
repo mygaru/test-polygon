@@ -10,8 +10,8 @@ on:
       - '.github/workflows/build_idr_client.yml'
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: mygaru/idr-client
+  REGISTRY: docker.io
+  IMAGE_NAME: dsiviy/idr-client
 
 jobs:
   release:
@@ -26,13 +26,13 @@ jobs:
           export SHORT_HASH=$(git rev-parse --short HEAD)
           echo VERSION=$BUILD_DATE-$GITHUB_RUN_NUMBER-$SHORT_HASH >> $GITHUB_ENV
 
-      - name: Login to Docker Registry
+      - name: Login to Docker Hub
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}  # добавьте секрет для имени пользователя Docker Hub
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}  # добавьте секрет для Docker Hub access token
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -49,7 +49,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./idr-client/Dockerfile
+          file: ./radius-listener/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
