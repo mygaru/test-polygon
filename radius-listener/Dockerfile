@@ -3,6 +3,6 @@ WORKDIR /usr/src/radius-listener
 
 COPY . .
 
-#EXPOSE 80 443
+EXPOSE 8081
 
 CMD ["./rcatcher", "--config", "config.ini"]
